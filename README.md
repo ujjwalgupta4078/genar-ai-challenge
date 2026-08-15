@@ -6,6 +6,10 @@ GENAR AI is an AI-assisted pharmacovigilance reporting application designed to h
 
 The goal of the project is to reduce the manual effort required to analyze large amounts of pharmacovigilance data and prepare structured safety reporting content.
 
+## 🚀 Live Demo
+
+👉 [Try GENAR AI Live](https://genar-ai-challenge-gpfykrgx9bdektc9qiapoo.streamlit.app/)
+
 ---
 
 ## 🎯 What Problem Does GENAR AI Solve?
