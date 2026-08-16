@@ -5,6 +5,7 @@ from pathlib import Path
 from src.pader_analysis import build_pader_analysis
 from src.llm_prompt import build_pader_prompt
 from src.llm_generator import generate_pader_report
+from src.report_validator import validate_report
 
 
 # =========================================================
@@ -333,6 +334,8 @@ if outcome_data:
 
 # =========================================================
 # GENERATE PADER REPORT
+## =========================================================
+# PADER REPORT GENERATION + VALIDATION
 # =========================================================
 
 st.divider()
@@ -355,25 +358,50 @@ if st.button(
             "Generating PADER safety narrative..."
         ):
 
+            # Build controlled prompt from evidence
             prompt = build_pader_prompt(analysis)
 
+            # Generate PADER report
             report = generate_pader_report(
                 prompt
             )
 
-            st.session_state["pader_report"] = report
+            # Validate generated report
+            validation = validate_report(
+                report,
+                analysis
+            )
 
-        st.success(
-            "PADER report generated successfully."
-        )
+            # Stop if validation fails
+            if not validation["valid"]:
+
+                st.error(
+                    "PADER report validation failed."
+                )
+
+                st.warning(
+                    f"{validation['issue_count']} "
+                    "validation issue(s) detected."
+                )
+
+                for issue in validation["issues"]:
+                    st.warning(issue)
+
+            else:
+
+                # Save only validated report
+                st.session_state["pader_report"] = report
+
+                st.success(
+                    "PADER report generated and "
+                    "validated successfully."
+                )
 
     except Exception as e:
 
         st.error(
             f"Report generation failed: {e}"
         )
-
-
 # =========================================================
 # DISPLAY GENERATED REPORT
 # =========================================================
