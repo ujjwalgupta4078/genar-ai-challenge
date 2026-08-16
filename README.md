@@ -493,3 +493,14 @@ Human Review
 **GENAR AI — Pharmacovigilance Safety Report Generator**
 
 Built as an AI-assisted pharmacovigilance reporting prototype.
+
+## 📸 Screenshots
+
+### GENAR AI Dashboard
+![GENAR AI Dashboard](screenshots/dashboard.png)
+
+### Dataset Analysis
+![Dataset Analysis](screenshots/analysis.png)
+
+### Generated PADER Report
+![PADER Report](screenshots/pader-report.png)
